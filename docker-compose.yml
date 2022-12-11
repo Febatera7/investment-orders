@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  database:
+    container_name: "challenge-database"
+    image: mysql:5.7
+    command: --default-authentication-plugin=caching_sha2_password --initialize-insecure --explicit_defaults_for_timestamp
+    restart: always
+    ports:
+      - "3310:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=challenge-database
+      - MYSQL_USER=challenger
+      - MYSQL_PASSWORD=passchallenger
+  app:
+    build: .
+    command: yarn start
+    ports:
+      - "3800:3800"
+    volumes:
+      - .:/usr/app
