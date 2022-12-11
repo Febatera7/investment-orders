@@ -5,10 +5,10 @@
   "main": "dist/server.js",
   "scripts": {
     "start": "node dist/server.js",
-		"build": "tsc -p tsconfig.json",
-		"dev": "tsnd --cls --rs --exit-child --transpile-only -- src/server.ts",
-		"format": "prettier --write \"src/**/*.ts\" && yarn lint",
-		"lint": "eslint \"src/**/*.ts\" --fix",
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsnd --cls --rs --exit-child --transpile-only -- src/server.ts",
+    "format": "prettier --write \"src/**/*.ts\" && yarn lint",
+    "lint": "eslint \"src/**/*.ts\" --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,7 +26,9 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "log4js": "^6.7.1"
+    "log4js": "^6.7.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.26.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
