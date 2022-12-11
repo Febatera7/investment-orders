@@ -1,4 +1,4 @@
-import app from "./api/app";
+import app from "./app";
 import logger from "./utils/logger";
 
 const { APP_NAME: appName, PORT: port } = process.env;

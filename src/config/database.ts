@@ -16,4 +16,4 @@ const databaseConfig: Connection = {
     port: parseInt(MYSQL_PORT)
 };
 
-export default databaseConfig;
+export = databaseConfig;
