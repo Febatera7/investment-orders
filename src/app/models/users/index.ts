@@ -1,36 +1,16 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../../../database/connection";
 
-const UsersModel = sequelize.define("users", {
-    userId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        allowNull: false,
-        autoIncrement: true
-    },
-    name: {
-        type: DataTypes.STRING(80),
-        allowNull: false
-    },
-    email: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
-        unique: true
-    },
-    cpf: {
-        type: DataTypes.STRING(11),
-        allowNull: false,
-        unique: true
-    },
-    birthday: {
-        type: DataTypes.DATE,
-        allowNull: false
-    },
-    active: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: true
-    }
-}, { freezeTableName: true, timestamps: false });
+import { Schema, model } from "mongoose";
+
+const usersSchema = new Schema({
+    userId: { type: Number, required: true, unique: true },
+    name: { type: String, required: true },
+    email: { type: String, required: false, unique: true },
+    password: { type: String, required: true },
+    cpf: { type: String, required: true, unique: true },
+    birthday: { type: Date, required: true},
+    active: { type: Boolean, default: true, required: true }
+}, { _id: false });
+
+const UsersModel = model("Users", usersSchema);
 
 export default UsersModel;

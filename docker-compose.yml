@@ -1,15 +1,10 @@
 version: '3'
 
 services:
-  mysql_server:
-    image: mysql:5.7
+  mongo:
+    image: mongo
     ports:
-      - "3310:3306"
-    environment: 
-      - MYSQL_DATABASE=challenge-database
-      - MYSQL_USER=challenger
-      - MYSQL_PASSWORD=cGFzc2NoYWxsZW5nZXI
-      - MYSQL_ROOT_PASSWORD=cGFzc2NoYWxsZW5nZXI
+      - "27117:27017"
 
   app:
     build: .

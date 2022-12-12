@@ -1,60 +1,16 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../../../database/connection";
+import { Schema, model } from "mongoose";
 
-const OrdersModel = sequelize.define("orders", {
-    orderId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        allowNull: false,
-        autoIncrement: true
-    },
-    productValue: {
-        type: DataTypes.FLOAT,
-        allowNull: false
-    },
-    productQuantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    totalValue: {
-        type: DataTypes.FLOAT,
-        allowNull: false
-    },
-    orderDate: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
-    },
-    userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: "users",
-            key: "userId"
-        },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE",
-    },
-    customerId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: "customers",
-            key: "customerId"
-        },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE",
-    },
-    productId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: "products",
-            key: "productId"
-        },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE",
-    }
-}, { freezeTableName: true, timestamps: false });
+const ordersSchema = new Schema({
+    orderId: { type: Number, required: true, unique: true },
+    productValue: { type: Number, required: true },
+    productQuantity: { type: Number, required: true },
+    totalValue: { type: Number, required: true },
+    orderDate: { type: Date, required: true },
+    userId: { type: Number, ref: "Users", required: true },
+    customerId: { type: Number, ref: "Customers", required: true },
+    productId: { type: Number, ref: "Products", required: true },
+}, { _id: false });
+
+const OrdersModel = model("Orders", ordersSchema);
 
 export default OrdersModel;

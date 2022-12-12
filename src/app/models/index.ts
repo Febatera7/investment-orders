@@ -1,11 +1,11 @@
-import CustomersModel from "./customers";
-import OrdersModel from "./orders";
-import ProductsModel from "./products";
-import UsersModel from "./users";
+// import Customers from "./customers";
+// import Orders from "./orders";
+// import Products from "./products";
+// import Users from "./users";
 
 export {
-    CustomersModel,
-    OrdersModel,
-    ProductsModel,
-    UsersModel
+    // Customers,
+    // Orders,
+    // Products,
+    // Users
 };

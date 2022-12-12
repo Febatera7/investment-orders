@@ -1,31 +1,16 @@
-import { Sequelize } from "sequelize";
-import databaseConfig from "../config/database";
 import logger from "../utils/logger";
+import mongoose from "mongoose";
+import mongooseAutoIncrement from "mongoose-auto-increment";
 
-const {
-    database,
-    host,
-    password,
-    port,
-    username
-} = databaseConfig;
+const { MONGO_HOST, APP_NAME } = process.env;
 
-const sequelizeConnection = new Sequelize(
-    database,
-    username,
-    password,
-    {
-        host,
-        port,
-        dialect: "mysql",
-        // logging: false
-    },
-);
+const mongoConnection = async (): Promise<void> => {
+    try {
+        await mongoose.connect(MONGO_HOST);
+        logger.info(`${APP_NAME} Database connected`);
+    } catch(error) {
+        logger.error(`Error on connected to ${APP_NAME} Database: ${error}`);
+    }
+};
 
-sequelizeConnection.authenticate().then(() => {
-    logger.info(`Sequelize connected to database ${database}`);
-}).catch((error) => {
-    logger.error(`Sequelize not connected to database: ${error}`);
-});
-
-export default sequelizeConnection;
+export default mongoConnection;

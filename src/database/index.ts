@@ -1,9 +1,9 @@
 import logger from "../utils/logger";
-import sequelizeConnection from "./connection";
+import mongoConnection from "./connection";
 
 const initializeDatabases = async (): Promise<void> => {
 	try {
-		await sequelizeConnection.sync({ force: true });
+		await mongoConnection();
 	} catch(error) {
 		logger.error(error);
 	}

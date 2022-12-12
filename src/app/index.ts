@@ -10,6 +10,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(routes);
 
-async () => await initializeDatabases();
+initializeDatabases();
 
 export default app;
