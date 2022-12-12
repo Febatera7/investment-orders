@@ -1,14 +1,11 @@
-import { Request, Response } from "express";
-import { helloWorldServices } from "../services";
-import logger from "../../utils/logger";
+import CustomersController from "./customers";
+import OrdersController from "./orders";
+import ProductsController from "./products";
+import UsersController from "./users";
 
-export const helloWorldController = async(req: Request, res: Response): Promise<void> => {
-    try {
-        const helloWorld = helloWorldServices();
-
-        res.status(200).send({ message: helloWorld });
-    } catch (error) {
-        logger.error(error);
-        res.status(400).send({ error: error.message });
-    }
+export {
+    CustomersController,
+    OrdersController,
+    ProductsController,
+    UsersController
 };

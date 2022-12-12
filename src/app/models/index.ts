@@ -3,7 +3,7 @@ import OrdersModel from "./orders";
 import ProductsModel from "./products";
 import UsersModel from "./users";
 
-export = {
+export {
     CustomersModel,
     OrdersModel,
     ProductsModel,
