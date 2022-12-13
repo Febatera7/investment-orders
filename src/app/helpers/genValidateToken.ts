@@ -1,10 +1,10 @@
-import { JwtPayload, sign, verify } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 import authConfig from "../config/auth";
 import logger from "../../utils/logger";
 
 const generateToken = (id: number): string => {
     try {
-        const token = sign({ id }, 
+        const token = sign({ userId: id }, 
             authConfig.secret, 
             {
             expiresIn: authConfig.expiresIn,
@@ -16,11 +16,11 @@ const generateToken = (id: number): string => {
     }
 };
 
-const validateToken = (token: string): string | JwtPayload => {
+const validateToken = (token: string): string => {
     try {
         const decoded = verify(token, authConfig.secret);
 
-        return decoded;
+        return JSON.stringify(decoded);
     } catch (error) {
         logger.error(error);
     }

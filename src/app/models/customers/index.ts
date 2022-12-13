@@ -1,7 +1,8 @@
 import { Schema, model } from "mongoose";
+import Customers from "./dto";
 
 const customersSchema = new Schema({
-    customerId: { type: Number, required: true, unique: true },
+    _id: { type: Number, required: true, unique: true },
     name: { type: String, required: true },
     email: { type: String, required: false, unique: true },
     cpf: { type: String, required: true, unique: true },
@@ -10,6 +11,6 @@ const customersSchema = new Schema({
     active: { type: Boolean, default: true, required: true }
 }, { _id: false });
 
-const CustomersModel = model("Customers", customersSchema);
+const CustomersModel = model<Customers>("Customers", customersSchema);
 
 export default CustomersModel;

@@ -1,7 +1,8 @@
 import { Schema, model } from "mongoose";
+import Orders from "./dto";
 
 const ordersSchema = new Schema({
-    orderId: { type: Number, required: true, unique: true },
+    _id: { type: Number, required: true, unique: true },
     productValue: { type: Number, required: true },
     productQuantity: { type: Number, required: true },
     totalValue: { type: Number, required: true },
@@ -11,6 +12,6 @@ const ordersSchema = new Schema({
     productId: { type: Number, ref: "Products", required: true },
 }, { _id: false });
 
-const OrdersModel = model("Orders", ordersSchema);
+const OrdersModel = model<Orders>("Orders", ordersSchema);
 
 export default OrdersModel;

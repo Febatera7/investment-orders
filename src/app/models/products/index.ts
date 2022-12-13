@@ -1,12 +1,13 @@
 import { Schema, model } from "mongoose";
+import Products from "./dto";
 
 const productsSchema = new Schema({
-    productId: { type: Number, required: true, unique: true },
+    _id: { type: Number, required: true, unique: true },
     name: { type: String, required: true },
     value: { type: Number, required: true },
     active: { type: Boolean, default: true, required: true }
 }, { _id: false });
 
-const ProductsModel = model("Products", productsSchema);
+const ProductsModel = model<Products>("Products", productsSchema);
 
 export default ProductsModel;
