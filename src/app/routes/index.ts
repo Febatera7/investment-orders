@@ -12,6 +12,6 @@ routes.use("/customers", authMiddleware, customersRoutes);
 routes.use("/orders", authMiddleware, ordersRoutes);
 routes.use("/products", authMiddleware, productsRoutes);
 routes.use("/session", sessionRoutes);
-routes.use("/users", authMiddleware, usersRoutes);
+routes.use("/users", usersRoutes);
 
 export default routes;

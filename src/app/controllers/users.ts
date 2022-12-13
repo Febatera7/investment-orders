@@ -29,6 +29,8 @@ const read = async (req: Request, res: Response): Promise<void> => {
 
         const response: UsersResponse = await findUser(userId);
 
+        if(!response) throw new Error("User not found");
+
         res.status(200).send(response);
     } catch (error) {
         logger.error(error);
@@ -46,6 +48,8 @@ const update = async (req: Request, res: Response): Promise<void> => {
 
         const response: UsersResponse = await updateUser(user);
 
+        if(!response) throw new Error("User not found");
+
         res.status(200).send({
             oldData: response,
             modifiedData: userBody
@@ -61,6 +65,8 @@ const activeInactive = async (req: Request, res: Response): Promise<void> => {
         const userId: number = req.userId;
 
         const response: UsersResponse = await activeInactiveUser(userId);
+
+        if(!response) throw new Error("User not found");
 
         res.status(200).send(response);
     } catch (error) {

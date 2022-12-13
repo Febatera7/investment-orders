@@ -31,6 +31,8 @@ const read = async (req: Request, res: Response): Promise<void> => {
 
         const response: ProductsResponse[] = await findProducts(userId);
 
+        if (!response.length) throw new Error("Dont have products registered");
+
         res.status(200).send(response);
     } catch (error) {
         logger.error(error);
@@ -41,6 +43,7 @@ const read = async (req: Request, res: Response): Promise<void> => {
 const update = async (req: Request, res: Response): Promise<void> => {
     try {
         const { productId } = req.params;
+        const userId: number = req.userId;
 
         const productBody: ProductsParams = req.body;
 
@@ -48,7 +51,9 @@ const update = async (req: Request, res: Response): Promise<void> => {
 
         const product: ProductsParams = { _id: productIdParse, ...productBody };
 
-        const response: ProductsResponse = await updateProduct(product);
+        const response: ProductsResponse = await updateProduct(product, userId);
+
+        if (!response) throw new Error("Product not found");
 
         res.status(200).send({
             oldData: response,
@@ -63,10 +68,13 @@ const update = async (req: Request, res: Response): Promise<void> => {
 const activeInactive = async (req: Request, res: Response): Promise<void> => {
     try {
         const { productId } = req.params;
+        const userId: number = req.userId;
 
         const productIdParse: number = parseInt(productId);
 
-        const response: ProductsResponse = await activeInactiveProduct(productIdParse);
+        const response: ProductsResponse = await activeInactiveProduct(productIdParse, userId);
+
+        if (!response) throw new Error("Product not found");
 
         res.status(200).send(response);
     } catch (error) {

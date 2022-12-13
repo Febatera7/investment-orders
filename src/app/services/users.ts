@@ -15,10 +15,18 @@ const {
 
 const createUser = async (user: UserParams): Promise<CreateResponse> => {
     try {
-        const userId = generateId();
+        let userId: number;
 
+        let findId = true;
+
+        while (findId) {
+            userId = generateId();
+            const idExists = await find(userId);
+            if (!idExists) findId = false;
+        }
+        
         const passwordHash = await passwordGenerate(user.password);
-
+        
         const newUser: UsersResponse = await create({
             _id: userId,
             name: user.name,
@@ -28,7 +36,9 @@ const createUser = async (user: UserParams): Promise<CreateResponse> => {
             birthday: user.birthday,
         });
 
-        const token: string = generateToken(userId);
+        let token: string = generateToken(userId);
+
+        if (typeof newUser === "string") token = "";
 
         return { newUser, token };
     } catch (error) {

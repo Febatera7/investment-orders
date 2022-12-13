@@ -31,6 +31,8 @@ const read = async (req: Request, res: Response): Promise<void> => {
 
         const response: CustomersResponse[] = await findCustomers(userId);
 
+        if(!response.length) throw new Error("Cannot find any customers registered");
+
         res.status(200).send(response);
     } catch (error) {
         logger.error(error);
@@ -42,13 +44,17 @@ const update = async (req: Request, res: Response): Promise<void> => {
     try {
         const { customerId } = req.params;
 
+        const userId: number = req.userId;
+
         const customerBody: CustomersParams = req.body;
 
         const customerIdParse: number = parseInt(customerId);
 
         const customer: CustomersParams = { _id: customerIdParse, ...customerBody };
 
-        const response: CustomersResponse = await updateCustomer(customer);
+        const response: CustomersResponse = await updateCustomer(customer, userId);
+
+        if(!response) throw new Error("Customer not found");
 
         res.status(200).send({
             oldData: response,
@@ -64,9 +70,13 @@ const activeInactive = async (req: Request, res: Response): Promise<void> => {
     try {
         const { customerId } = req.params;
 
+        const userId: number = req.userId;
+
         const customerIdParse: number = parseInt(customerId);
 
-        const response: CustomersResponse = await activeInactiveCustomer(customerIdParse);
+        const response: CustomersResponse = await activeInactiveCustomer(customerIdParse, userId);
+
+        if(!response) throw new Error("Customer not found");
 
         res.status(200).send(response);
     } catch (error) {

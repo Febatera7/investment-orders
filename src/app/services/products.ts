@@ -40,9 +40,9 @@ const findProducts = async (userId: number): Promise<ProductsResponse[]> => {
     }
 };
 
-const findProduct = async (productId: number): Promise<ProductsResponse> => {
+const findProduct = async (productId: number, userId: number): Promise<ProductsResponse> => {
     try {
-        const product: ProductsResponse = await findOne(productId);
+        const product: ProductsResponse = await findOne(productId, userId);
 
         return product;
     } catch (error) {
@@ -51,9 +51,9 @@ const findProduct = async (productId: number): Promise<ProductsResponse> => {
     }
 };
 
-const updateProduct = async (productData: ProductsParams): Promise<ProductsResponse> => {
+const updateProduct = async (productData: ProductsParams, userId: number): Promise<ProductsResponse> => {
     try {
-        const product: ProductsResponse = await update(productData);
+        const product: ProductsResponse = await update(productData, userId);
 
         return product;
     } catch (error) {
@@ -62,9 +62,9 @@ const updateProduct = async (productData: ProductsParams): Promise<ProductsRespo
     }
 };
 
-const activeInactiveProduct = async (productId: number): Promise<ProductsResponse> => {
+const activeInactiveProduct = async (productId: number, userId: number): Promise<ProductsResponse> => {
     try {
-        const product: ProductsResponse = await activeInactive(productId);
+        const product: ProductsResponse = await activeInactive(productId, userId);
 
         return product;
     } catch (error) {

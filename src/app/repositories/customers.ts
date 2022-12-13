@@ -25,9 +25,9 @@ const findCustomers = async (userId: number): Promise<Customers[]> => {
     }
 };
 
-const findCustomer = async (customerId: number): Promise<Customers> => {
+const findCustomer = async (customerId: number, userId: number): Promise<Customers> => {
     try {
-        const customer: Customers = await CustomersModel.findById(customerId);
+        const customer: Customers = await CustomersModel.findOne({ _id: customerId, userId });
 
         return customer;
     } catch (error) {
@@ -36,10 +36,10 @@ const findCustomer = async (customerId: number): Promise<Customers> => {
     }
 };
 
-const updateCustomer = async (customer: CustomersParams): Promise<Customers> => {
+const updateCustomer = async (customer: CustomersParams, userId: number): Promise<Customers> => {
     try {
-        const oldCustomerDocument: Customers = await CustomersModel.findByIdAndUpdate(
-            customer._id,
+        const oldCustomerDocument: Customers = await CustomersModel.findOneAndUpdate(
+            { _id: customer._id, userId },
             { ...customer }
         );
 
@@ -50,9 +50,9 @@ const updateCustomer = async (customer: CustomersParams): Promise<Customers> => 
     }
 };
 
-const activeInactiveCustomer = async (customerId: number): Promise<Customers> => {
+const activeInactiveCustomer = async (customerId: number, userId: number): Promise<Customers> => {
     try {
-        const customer: Customers = await CustomersModel.findById(customerId);
+        const customer: Customers = await CustomersModel.findOne({ _id: customerId, userId },);
 
         const active = customer.active ? false : true;
 

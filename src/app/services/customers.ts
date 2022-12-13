@@ -42,9 +42,9 @@ const findCustomers = async (userId: number): Promise<CustomersResponse[]> => {
     }
 };
 
-const findCustomer = async (customerId: number): Promise<CustomersResponse> => {
+const findCustomer = async (customerId: number, userId: number): Promise<CustomersResponse> => {
     try {
-        const customer: CustomersResponse = await findOne(customerId);
+        const customer: CustomersResponse = await findOne(customerId, userId);
 
         return customer;
     } catch (error) {
@@ -53,9 +53,9 @@ const findCustomer = async (customerId: number): Promise<CustomersResponse> => {
     }
 };
 
-const updateCustomer = async (customerData: CustomersParams): Promise<CustomersResponse> => {
+const updateCustomer = async (customerData: CustomersParams, userId: number): Promise<CustomersResponse> => {
     try {
-        const customer: CustomersResponse = await update(customerData);
+        const customer: CustomersResponse = await update(customerData, userId);
 
         return customer;
     } catch (error) {
@@ -64,9 +64,9 @@ const updateCustomer = async (customerData: CustomersParams): Promise<CustomersR
     }
 };
 
-const activeInactiveCustomer = async (customerId: number): Promise<CustomersResponse> => {
+const activeInactiveCustomer = async (customerId: number, userId: number): Promise<CustomersResponse> => {
     try {
-        const customer: CustomersResponse = await activeInactive(customerId);
+        const customer: CustomersResponse = await activeInactive(customerId, userId);
 
         return customer;
     } catch (error) {

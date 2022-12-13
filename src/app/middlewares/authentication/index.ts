@@ -1,18 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { NextFunction, Request, Response } from "express";
-import { UsersRepository } from "../../repositories";
+import Decoded from "../../interfaces/authMiddleware";
 import logger from "../../../utils/logger";
+import { usersServices } from "../../services";
 import { validateToken } from "../../helpers/genValidateToken";
 
-const { findUser } = UsersRepository;
+const { findUser } = usersServices;
 
-interface Decoded {
-    userId?: number,
-    iat?: number,
-    exp?: number
-}
-
-const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+export default async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         const authHeader = req.headers.authorization;
 
@@ -39,4 +34,3 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
     }
 };
 
-export default authMiddleware;

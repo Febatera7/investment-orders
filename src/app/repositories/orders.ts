@@ -25,9 +25,9 @@ const findOrders = async (userId: number): Promise<Orders[]> => {
     }
 };
 
-const findOrdersByCustomer = async (customerId: number): Promise<Orders[]> => {
+const findOrdersByCustomer = async (customerId: number, userId: number): Promise<Orders[]> => {
     try {
-        const orders: Orders[] = await OrdersModel.find({ customerId });
+        const orders: Orders[] = await OrdersModel.find({ customerId, userId });
 
         return orders;
     } catch (error) {
@@ -36,9 +36,9 @@ const findOrdersByCustomer = async (customerId: number): Promise<Orders[]> => {
     }
 };
 
-const findOrdersByProduct = async (productId: number): Promise<Orders[]> => {
+const findOrdersByProduct = async (productId: number, userId: number): Promise<Orders[]> => {
     try {
-        const orders: Orders[] = await OrdersModel.find({ productId });
+        const orders: Orders[] = await OrdersModel.find({ productId, userId });
 
         return orders;
     } catch (error) {
@@ -48,9 +48,9 @@ const findOrdersByProduct = async (productId: number): Promise<Orders[]> => {
 };
 
 
-const deleteOrder = async (orderId: number): Promise<Orders> => {
+const deleteOrder = async (orderId: number, userId: number): Promise<Orders> => {
     try {
-        const order: Orders = await OrdersModel.findByIdAndDelete(orderId);
+        const order: Orders = await OrdersModel.findOneAndDelete({ _id: orderId, userId });
 
         return order;
     } catch (error) {
