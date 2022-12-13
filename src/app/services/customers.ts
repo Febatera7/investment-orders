@@ -4,13 +4,14 @@ import generateId from "../helpers/generateId";
 import logger from "../../utils/logger";
 
 const {
-    createCustomers: create,
-    findCustomers: find,
+    createCustomer: create,
+    findCustomers: findAll,
+    findCustomer: findOne,
     updateCustomer: update,
     activeInactiveCustomer: activeInactive
 } = CustomersRepository;
 
-const createCustomers = async (customer: CustomersParams, userId: number): Promise<CustomersResponse> => {
+const createCustomer = async (customer: CustomersParams, userId: number): Promise<CustomersResponse> => {
     try {
         const customerId = generateId();
 
@@ -30,11 +31,22 @@ const createCustomers = async (customer: CustomersParams, userId: number): Promi
     }
 };
 
-const findCustomers = async (userId: number): Promise<CustomersParams[]> => {
+const findCustomers = async (userId: number): Promise<CustomersResponse[]> => {
     try {
-        const customers: CustomersParams[] = await find(userId);
+        const customers: CustomersResponse[] = await findAll(userId);
 
         return customers;
+    } catch (error) {
+        logger.error(error);
+        return error.message;
+    }
+};
+
+const findCustomer = async (customerId: number): Promise<CustomersResponse> => {
+    try {
+        const customer: CustomersResponse = await findOne(customerId);
+
+        return customer;
     } catch (error) {
         logger.error(error);
         return error.message;
@@ -52,11 +64,11 @@ const updateCustomer = async (customerData: CustomersParams): Promise<CustomersR
     }
 };
 
-const activeInactiveCustomer = async (userId: number): Promise<CustomersResponse> => {
+const activeInactiveCustomer = async (customerId: number): Promise<CustomersResponse> => {
     try {
-        const createUser: CustomersResponse = await activeInactive(userId);
+        const customer: CustomersResponse = await activeInactive(customerId);
 
-        return createUser;
+        return customer;
     } catch (error) {
         logger.error(error);
         return error.message;
@@ -64,8 +76,9 @@ const activeInactiveCustomer = async (userId: number): Promise<CustomersResponse
 };
 
 export default {
-    createCustomers,
+    createCustomer,
     findCustomers,
+    findCustomer,
     updateCustomer,
     activeInactiveCustomer
 };

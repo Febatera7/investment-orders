@@ -3,11 +3,11 @@ import CustomersModel from "../models/customers";
 import { CustomersParams } from "../interfaces/customers";
 import logger from "../../utils/logger";
 
-const createCustomers = async (customer: CustomersParams): Promise<Customers> => {
+const createCustomer = async (customer: CustomersParams): Promise<Customers> => {
     try {
-        const createCustomer: Customers = await CustomersModel.create(customer);
+        const newCustomer: Customers = await CustomersModel.create(customer);
 
-        return createCustomer;
+        return newCustomer;
     } catch (error) {
         logger.error(error);
         return error.message;
@@ -19,6 +19,17 @@ const findCustomers = async (userId: number): Promise<Customers[]> => {
         const customers: Customers[] = await CustomersModel.find({ userId });
 
         return customers;
+    } catch (error) {
+        logger.error(error);
+        return error.message;
+    }
+};
+
+const findCustomer = async (customerId: number): Promise<Customers> => {
+    try {
+        const customer: Customers = await CustomersModel.findById(customerId);
+
+        return customer;
     } catch (error) {
         logger.error(error);
         return error.message;
@@ -57,8 +68,9 @@ const activeInactiveCustomer = async (customerId: number): Promise<Customers> =>
 };
 
 export default {
-    createCustomers,
+    createCustomer,
     findCustomers,
+    findCustomer,
     updateCustomer,
     activeInactiveCustomer
 };

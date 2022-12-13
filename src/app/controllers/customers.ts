@@ -4,7 +4,7 @@ import { customersServices } from "../services";
 import logger from "../../utils/logger";
 
 const {
-    createCustomers,
+    createCustomer,
     findCustomers,
     updateCustomer,
     activeInactiveCustomer
@@ -16,7 +16,7 @@ const create = async (req: Request, res: Response): Promise<void> => {
 
         const customer: CustomersParams = req.body;
 
-        const response: CustomersResponse = await createCustomers(customer, userId);
+        const response: CustomersResponse = await createCustomer(customer, userId);
 
         res.status(201).send(response);
     } catch (error) {

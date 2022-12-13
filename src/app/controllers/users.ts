@@ -4,7 +4,7 @@ import logger from "../../utils/logger";
 import { usersServices } from "../services";
 
 const {
-    createUsers,
+    createUser,
     findUser,
     updateUser,
     activeInactiveUser
@@ -14,7 +14,7 @@ const create = async (req: Request, res: Response): Promise<void> => {
     try {
         const user: UserParams = req.body;
 
-        const response: CreateResponse = await createUsers(user);
+        const response: CreateResponse = await createUser(user);
 
         res.status(201).send(response);
     } catch (error) {

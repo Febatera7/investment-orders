@@ -1,4 +1,4 @@
-import { UserParams, UsersResponse } from "../interfaces/users";
+import { CreateResponse, UserParams, UsersResponse } from "../interfaces/users";
 import { UsersRepository } from "../repositories";
 import generateId from "../helpers/generateId";
 import { generateToken } from "../helpers/genValidateToken";
@@ -6,13 +6,14 @@ import logger from "../../utils/logger";
 import { passwordGenerate } from "../helpers/passwordHash";
 
 const {
-    createUsers: create,
+    createUser: create,
     findUser: find,
     updateUser: update,
-    activeInactiveUser: activeInactive
+    activeInactiveUser: activeInactive,
+    findByEmail: findEmail
 } = UsersRepository;
 
-const createUsers = async (user: UserParams): Promise<object> => {
+const createUser = async (user: UserParams): Promise<CreateResponse> => {
     try {
         const userId = generateId();
 
@@ -36,7 +37,7 @@ const createUsers = async (user: UserParams): Promise<object> => {
     }
 };
 
-const findUser = async (userId: number): Promise<object> => {
+const findUser = async (userId: number): Promise<UsersResponse> => {
     try {
         const user: UsersResponse = await find(userId);
 
@@ -47,7 +48,7 @@ const findUser = async (userId: number): Promise<object> => {
     }
 };
 
-const updateUser = async (user: UserParams): Promise<object> => {
+const updateUser = async (user: UserParams): Promise<UsersResponse> => {
     try {
         if (user.password) {
             const passwordHash: string = await passwordGenerate(user.password);
@@ -64,11 +65,22 @@ const updateUser = async (user: UserParams): Promise<object> => {
     }
 };
 
-const activeInactiveUser = async (userId: number): Promise<object> => {
+const activeInactiveUser = async (userId: number): Promise<UsersResponse> => {
     try {
-        const changeActiveFlag: UsersResponse = await activeInactive(userId);
+        const user: UsersResponse = await activeInactive(userId);
 
-        return changeActiveFlag;
+        return user;
+    } catch (error) {
+        logger.error(error);
+        return error.message;
+    }
+};
+
+const findByEmail = async (email: string): Promise<UsersResponse> => {
+    try {
+        const user: UsersResponse = await findEmail(email);
+
+        return user;
     } catch (error) {
         logger.error(error);
         return error.message;
@@ -76,8 +88,9 @@ const activeInactiveUser = async (userId: number): Promise<object> => {
 };
 
 export default {
-    createUsers,
+    createUser,
     findUser,
     updateUser,
-    activeInactiveUser
+    activeInactiveUser,
+    findByEmail
 };

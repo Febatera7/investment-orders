@@ -1,6 +1,5 @@
 import { Document } from "mongoose";
 
-
 interface Orders extends Document {
     _id?: number,
     productValue: number,
@@ -9,7 +8,7 @@ interface Orders extends Document {
     orderDate: Date,
     userId: number,
     customerId: number,
-    productd: number,
+    productId: number,
 }
 
 export default Orders;

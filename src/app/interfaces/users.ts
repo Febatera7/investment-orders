@@ -8,11 +8,6 @@ export interface UserParams {
     active?: boolean
 }
 
-export interface CreateResponse {
-    token?: string,
-    newUser?: UserParams
-}
-
 export interface UsersResponse {
     _id?: number,
     name?: string,
@@ -22,3 +17,9 @@ export interface UsersResponse {
     birthday?: Date,
     active?: boolean
 }
+
+export interface CreateResponse {
+    token?: string,
+    newUser?: UsersResponse
+}
+

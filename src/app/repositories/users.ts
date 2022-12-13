@@ -3,11 +3,11 @@ import Users from "../models/users/dto";
 import UsersModel from "../models/users";
 import logger from "../../utils/logger";
 
-const createUsers = async (user: UserParams): Promise<Users> => {
+const createUser = async (user: UserParams): Promise<Users> => {
     try {
-        const createUser: Users = await UsersModel.create(user);
+        const newUser: Users = await UsersModel.create(user);
 
-        return createUser;
+        return newUser;
     } catch (error) {
         logger.error(error);
         return error.message;
@@ -68,7 +68,7 @@ const findByEmail = async (email: string): Promise<Users> => {
 };
 
 export default {
-    createUsers,
+    createUser,
     findUser,
     updateUser,
     activeInactiveUser,
