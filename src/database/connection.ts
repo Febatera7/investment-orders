@@ -1,6 +1,5 @@
 import logger from "../utils/logger";
 import mongoose from "mongoose";
-import mongooseAutoIncrement from "mongoose-auto-increment";
 
 const { MONGO_HOST, APP_NAME } = process.env;
 

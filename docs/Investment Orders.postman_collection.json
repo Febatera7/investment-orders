@@ -1,0 +1,499 @@
+{
+	"info": {
+		"_postman_id": "9dfbd760-453a-4607-831d-984dc52648ae",
+		"name": "Investment Orders",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13241423"
+	},
+	"item": [
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Charlie\",\r\n    \"email\": \"charlie.dog@investment.com\",\r\n    \"cpf\": \"11111111111\",\r\n    \"birthday\": \"2017-06-01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3800/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3800/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\": \"12345612300\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3800/customers/update/40640344",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"customers",
+								"update",
+								"40640344"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inactive",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3800/customers/inactive",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"customers",
+								"inactive"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "customerid",
+								"value": "99898909",
+								"type": "text"
+							},
+							{
+								"key": "productid",
+								"value": "96136375",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productQuantity\": 55\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3800/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3800/orders/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"orders",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read By Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3800/orders/customer/40640344",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"orders",
+								"customer",
+								"40640344"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read By Product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3800/orders/product/96136375",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"orders",
+								"product",
+								"96136375"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete One",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3800/orders/25934859",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"orders",
+								"25934859"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Felipe Soares\",\r\n    \"email\": \"felipe.soares@investment.com\",\r\n    \"password\": \"123456\",\r\n    \"cpf\": \"98765432100\",\r\n    \"birthday\": \"1993-06-16T15:30:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3800/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3800/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"12321231\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3800/users/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"users",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inactive",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3800/users/inactive",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"users",
+								"inactive"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Product6\",\r\n    \"value\": 30.25\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3800/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3800/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"value\": 37.29\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3800/products/update/96136375",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"products",
+								"update",
+								"96136375"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inactive",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3800/products/inactive",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"products",
+								"inactive"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Session",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"felipe.nunes@investment.com\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3800/session",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3800",
+					"path": [
+						"session"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQyNjAzMzE4LCJpYXQiOjE2NzA5NzEyODEsImV4cCI6MTY3MDk3MTg4MX0.GZ8PPOUhbpgi6_iHMmB7WpUo4wTHoRBA9LiH0-jhedw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

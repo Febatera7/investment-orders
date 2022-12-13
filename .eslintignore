@@ -1,8 +1,13 @@
-dist
-public
+#Modules
 node_modules
+
+#Build directory and files
+dist
 *.js
-./data
+
+#Package files
+.yarn
+yarn-error.log
+
+#VSCode configuration
 .vscode
-requirements
-*.spec.ts

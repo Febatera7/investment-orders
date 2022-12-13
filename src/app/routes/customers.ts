@@ -8,7 +8,7 @@ const routes = Router();
 
 routes.post("/", customerValidator, create);
 routes.get("/", read);
-routes.patch("/update/:customerId", update);
+routes.patch("/update/:customerId", customerValidator, update);
 routes.patch("/inactive/:customerId", activeInactive);
 
 export default routes;

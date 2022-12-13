@@ -1,12 +1,6 @@
 #Modules
 node_modules
 
-#Build directory
-dist
-
 #Package files
 .yarn
 yarn-error.log
-
-# I usually ignore the .env and upload just an example with .env.sample or .env.example
-# But to make it easier for the recruiter to use the app, I'll leave the environment variables exposed

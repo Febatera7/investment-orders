@@ -29,8 +29,9 @@ export default async (req: Request, res: Response, next: NextFunction): Promise<
 
         next();
     } catch (error) {
-        logger.error(error);
-        res.status(401).send({ error: error.message || "Session expired" });
+        res.status(401).send({ 
+            error: error.message === "Unexpected token u in JSON at position 0" ? "Session expired" : error.message 
+        });
     }
 };
 

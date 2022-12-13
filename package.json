@@ -8,8 +8,7 @@
     "build": "tsc -p tsconfig.json",
     "dev": "tsnd --cls --rs --exit-child --transpile-only -- src/server.ts",
     "format": "prettier --write \"src/**/*.ts\" && yarn lint",
-    "lint": "eslint \"src/**/*.ts\" --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint \"src/**/*.ts\" --fix"
   },
   "repository": {
     "type": "git",
