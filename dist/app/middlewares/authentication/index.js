@@ -1,5 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const logger_1 = __importDefault(require("../../../utils/logger"));
 const services_1 = require("../../services");
 const genValidateToken_1 = require("../../helpers/genValidateToken");
 const { findUser } = services_1.usersServices;
@@ -24,6 +28,7 @@ exports.default = async (req, res, next) => {
         next();
     }
     catch (error) {
+        logger_1.default.error(error);
         res.status(401).send({
             error: error.message === "Unexpected token u in JSON at position 0" ? "Session expired" : error.message
         });
