@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { NextFunction, Request, Response } from "express";
 import Decoded from "../../interfaces/authMiddleware";
 import logger from "../../../utils/logger";
@@ -31,6 +30,7 @@ export default async (req: Request, res: Response, next: NextFunction): Promise<
 
         next();
     } catch (error) {
+        logger.error(error);
         res.status(401).send({ 
             error: error.message === "Unexpected token u in JSON at position 0" ? "Session expired" : error.message 
         });
