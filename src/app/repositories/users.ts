@@ -39,23 +39,6 @@ const updateUser = async (user: UserParams): Promise<Users> => {
     }
 };
 
-const activeInactiveUser = async (userId: number): Promise<Users> => {
-    try {
-        const user: Users = await UsersModel.findById(userId);
-
-        const active = user.active ? false : true;
-
-        await user.update({ active });
-
-        user.active = active;
-
-        return user;
-    } catch (error) {
-        logger.error(error);
-        return error.message;
-    }
-};
-
 const findByEmail = async (email: string): Promise<Users> => {
     try {
         const user: Users = await UsersModel.findOne({ email });
@@ -71,6 +54,5 @@ export default {
     createUser,
     findUser,
     updateUser,
-    activeInactiveUser,
     findByEmail
 };

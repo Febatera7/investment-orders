@@ -9,16 +9,15 @@ const { createOrder, findOrders, findOrdersByCustomer, findOrdersByProduct, dele
 const create = async (req, res) => {
     try {
         const { productQuantity } = req.body;
-        const { customerid, productid } = req.headers;
         const userId = req.userId;
-        const customerId = parseInt(customerid.toString());
-        const productId = parseInt(productid.toString());
-        const product = await services_1.productsServices.findProduct(productId, userId);
-        if (!product)
-            throw new Error("Product not found");
+        const customerId = req.customerId;
+        const productId = req.productId;
         const customer = await services_1.customersServices.findCustomer(customerId, userId);
         if (!customer)
             throw new Error("Customer not found");
+        const product = await services_1.productsServices.findProduct(productId, userId);
+        if (!product)
+            throw new Error("Product not found");
         const response = await createOrder(productQuantity, userId, customerId, product);
         res.status(201).send(response);
     }

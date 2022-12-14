@@ -67,10 +67,22 @@ const activeInactiveCustomer = async (customerId: number, userId: number): Promi
     }
 };
 
+const findByEmail = async (email: string): Promise<Customers> => {
+    try {
+        const customer: Customers = await CustomersModel.findOne({ email });
+
+        return customer;
+    } catch (error) {
+        logger.error(error);
+        return error.message;
+    }
+};
+
 export default {
     createCustomer,
     findCustomers,
     findCustomer,
     updateCustomer,
-    activeInactiveCustomer
+    activeInactiveCustomer,
+    findByEmail
 };

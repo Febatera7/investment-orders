@@ -9,8 +9,10 @@ const { findUser } = usersServices;
 
 export default async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        const authHeader = req.headers.authorization;
+        if(req.headers.customerid) req.customerId = parseInt(req.headers.customerid.toString());
+        if(req.headers.productid) req.productId = parseInt(req.headers.productid.toString());
 
+        const authHeader = req.headers.authorization;
         if (!authHeader) throw new Error("Unauthorized");
 
         const [, token] = authHeader.split(" ");

@@ -7,7 +7,6 @@ const {
     createUser,
     findUser,
     updateUser,
-    activeInactiveUser
 } = usersServices;
 
 const create = async (req: Request, res: Response): Promise<void> => {
@@ -60,19 +59,4 @@ const update = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-const activeInactive = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const userId: number = req.userId;
-
-        const response: UsersResponse = await activeInactiveUser(userId);
-
-        if(!response) throw new Error("User not found");
-
-        res.status(200).send(response);
-    } catch (error) {
-        logger.error(error);
-        res.status(400).send({ error: error.message });
-    }
-};
-
-export default { create, read, update, activeInactive };
+export default { create, read, update };

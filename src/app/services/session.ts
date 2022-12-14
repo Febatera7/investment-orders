@@ -1,15 +1,18 @@
 import ResponseSession from "../interfaces/session";
-import Users from "../models/users/dto";
-import { UsersRepository } from "../repositories";
+import { UsersResponse } from "../interfaces/users";
 import { generateToken } from "../helpers/genValidateToken";
 import logger from "../../utils/logger";
 import { passwordRead } from "../helpers/passwordHash";
+import { usersServices } from ".";
 
 export default async (email: string, password: string): Promise<ResponseSession> => {
     try {
-        const findUser: Users = await UsersRepository.findByEmail(email);
+        const findUser: UsersResponse = await usersServices.findByEmail(email);
 
         const verifyPass: boolean = await passwordRead(password, findUser.password);
+
+        logger.info(verifyPass);
+        logger.info(findUser);
 
         if(!findUser || !verifyPass) throw new Error("Email or password dont registered");
 

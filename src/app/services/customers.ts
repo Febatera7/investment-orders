@@ -2,18 +2,22 @@ import { CustomersParams, CustomersResponse } from "../interfaces/customers";
 import { CustomersRepository } from "../repositories";
 import generateId from "../helpers/generateId";
 import logger from "../../utils/logger";
+import verifyEmailExists from "../helpers/verifyEmailExists";
 
 const {
     createCustomer: create,
     findCustomers: findAll,
     findCustomer: findOne,
     updateCustomer: update,
-    activeInactiveCustomer: activeInactive
+    activeInactiveCustomer: activeInactive,
+    findByEmail: findEmail
 } = CustomersRepository;
 
 const createCustomer = async (customer: CustomersParams, userId: number): Promise<CustomersResponse> => {
     try {
         const customerId = generateId();
+
+        if(await verifyEmailExists(customer.email)) throw new Error("E-mail already registered");
 
         const newCustomer: CustomersResponse = await create({
             _id: customerId,
@@ -75,10 +79,23 @@ const activeInactiveCustomer = async (customerId: number, userId: number): Promi
     }
 };
 
+const findByEmail = async (email: string): Promise<CustomersResponse> => {
+    try {
+        const user: CustomersResponse = await findEmail(email);
+
+        return user;
+    } catch (error) {
+        logger.error(error);
+        return error.message;
+    }
+};
+
+
 export default {
     createCustomer,
     findCustomers,
     findCustomer,
     updateCustomer,
-    activeInactiveCustomer
+    activeInactiveCustomer,
+    findByEmail
 };

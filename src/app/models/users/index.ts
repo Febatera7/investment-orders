@@ -8,8 +8,7 @@ const usersSchema: Schema = new Schema({
     email: { type: String, required: false, unique: true },
     password: { type: String, required: true },
     cpf: { type: String, required: true, unique: true },
-    birthday: { type: Date, required: true},
-    active: { type: Boolean, default: true, required: true }
+    birthday: { type: Date, required: true}
 }, { _id: false });
 
 const UsersModel = model<Users>("Users", usersSchema);

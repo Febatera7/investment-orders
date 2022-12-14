@@ -58,10 +58,21 @@ const activeInactiveCustomer = async (customerId, userId) => {
         return error.message;
     }
 };
+const findByEmail = async (email) => {
+    try {
+        const customer = await customers_1.default.findOne({ email });
+        return customer;
+    }
+    catch (error) {
+        logger_1.default.error(error);
+        return error.message;
+    }
+};
 exports.default = {
     createCustomer,
     findCustomers,
     findCustomer,
     updateCustomer,
-    activeInactiveCustomer
+    activeInactiveCustomer,
+    findByEmail
 };

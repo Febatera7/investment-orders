@@ -9,13 +9,7 @@ const { MONGO_HOST, APP_NAME } = process.env;
 const mongoConnection = async () => {
     try {
         await mongoose_1.default.connect(MONGO_HOST);
-        mongoose_1.default.connection.on("open", function () {
-            logger_1.default.info(`${APP_NAME} Database connected`);
-        });
-        mongoose_1.default.connection.on("error", function (error) {
-            logger_1.default.info("Could not connect to mongo server!");
-            throw new Error(error);
-        });
+        logger_1.default.info(`${APP_NAME} Database connected`);
     }
     catch (error) {
         logger_1.default.error(`Error on connected to ${APP_NAME} Database: ${error}`);

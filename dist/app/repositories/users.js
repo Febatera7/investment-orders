@@ -35,19 +35,6 @@ const updateUser = async (user) => {
         return error.message;
     }
 };
-const activeInactiveUser = async (userId) => {
-    try {
-        const user = await users_1.default.findById(userId);
-        const active = user.active ? false : true;
-        await user.update({ active });
-        user.active = active;
-        return user;
-    }
-    catch (error) {
-        logger_1.default.error(error);
-        return error.message;
-    }
-};
 const findByEmail = async (email) => {
     try {
         const user = await users_1.default.findOne({ email });
@@ -62,6 +49,5 @@ exports.default = {
     createUser,
     findUser,
     updateUser,
-    activeInactiveUser,
     findByEmail
 };

@@ -8,7 +8,8 @@ const generateId_1 = __importDefault(require("../helpers/generateId"));
 const genValidateToken_1 = require("../helpers/genValidateToken");
 const logger_1 = __importDefault(require("../../utils/logger"));
 const passwordHash_1 = require("../helpers/passwordHash");
-const { createUser: create, findUser: find, updateUser: update, activeInactiveUser: activeInactive, findByEmail: findEmail } = repositories_1.UsersRepository;
+const verifyEmailExists_1 = __importDefault(require("../helpers/verifyEmailExists"));
+const { createUser: create, findUser: find, updateUser: update, findByEmail: findEmail } = repositories_1.UsersRepository;
 const createUser = async (user) => {
     try {
         let userId;
@@ -20,6 +21,8 @@ const createUser = async (user) => {
                 findId = false;
         }
         const passwordHash = await (0, passwordHash_1.passwordGenerate)(user.password);
+        if (await (0, verifyEmailExists_1.default)(user.email))
+            throw new Error("E-mail already registered");
         const newUser = await create({
             _id: userId,
             name: user.name,
@@ -62,16 +65,6 @@ const updateUser = async (user) => {
         return error.message;
     }
 };
-const activeInactiveUser = async (userId) => {
-    try {
-        const user = await activeInactive(userId);
-        return user;
-    }
-    catch (error) {
-        logger_1.default.error(error);
-        return error.message;
-    }
-};
 const findByEmail = async (email) => {
     try {
         const user = await findEmail(email);
@@ -86,6 +79,5 @@ exports.default = {
     createUser,
     findUser,
     updateUser,
-    activeInactiveUser,
     findByEmail
 };

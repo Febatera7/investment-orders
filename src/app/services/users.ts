@@ -4,12 +4,12 @@ import generateId from "../helpers/generateId";
 import { generateToken } from "../helpers/genValidateToken";
 import logger from "../../utils/logger";
 import { passwordGenerate } from "../helpers/passwordHash";
+import verifyEmailExists from "../helpers/verifyEmailExists";
 
 const {
     createUser: create,
     findUser: find,
     updateUser: update,
-    activeInactiveUser: activeInactive,
     findByEmail: findEmail
 } = UsersRepository;
 
@@ -26,6 +26,8 @@ const createUser = async (user: UserParams): Promise<CreateResponse> => {
         }
         
         const passwordHash = await passwordGenerate(user.password);
+
+        if(await verifyEmailExists(user.email)) throw new Error("E-mail already registered");
         
         const newUser: UsersResponse = await create({
             _id: userId,
@@ -75,17 +77,6 @@ const updateUser = async (user: UserParams): Promise<UsersResponse> => {
     }
 };
 
-const activeInactiveUser = async (userId: number): Promise<UsersResponse> => {
-    try {
-        const user: UsersResponse = await activeInactive(userId);
-
-        return user;
-    } catch (error) {
-        logger.error(error);
-        return error.message;
-    }
-};
-
 const findByEmail = async (email: string): Promise<UsersResponse> => {
     try {
         const user: UsersResponse = await findEmail(email);
@@ -101,6 +92,5 @@ export default {
     createUser,
     findUser,
     updateUser,
-    activeInactiveUser,
     findByEmail
 };

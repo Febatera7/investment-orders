@@ -6,8 +6,7 @@ interface Users extends Document {
     email: string,
     password: string,
     cpf: string,
-    birthday: Date,
-    active?: boolean
+    birthday: Date
 }
 
 export default Users;

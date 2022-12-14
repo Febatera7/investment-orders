@@ -4,8 +4,7 @@ export interface UserParams {
     email: string,
     password: string,
     cpf: string,
-    birthday: Date,
-    active?: boolean
+    birthday: Date
 }
 
 export interface UsersResponse {
@@ -14,8 +13,7 @@ export interface UsersResponse {
     email?: string,
     password?: string,
     cpf?: string,
-    birthday?: Date,
-    active?: boolean
+    birthday?: Date
 }
 
 export interface CreateResponse {

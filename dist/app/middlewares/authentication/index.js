@@ -5,6 +5,10 @@ const genValidateToken_1 = require("../../helpers/genValidateToken");
 const { findUser } = services_1.usersServices;
 exports.default = async (req, res, next) => {
     try {
+        if (req.headers.customerid)
+            req.customerId = parseInt(req.headers.customerid.toString());
+        if (req.headers.productid)
+            req.productId = parseInt(req.headers.productid.toString());
         const authHeader = req.headers.authorization;
         if (!authHeader)
             throw new Error("Unauthorized");

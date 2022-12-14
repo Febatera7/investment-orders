@@ -109,6 +109,108 @@
 			]
 		},
 		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Product6\",\r\n    \"value\": 30.25\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3800/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3800/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"value\": 37.29\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3800/products/update/96136375",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"products",
+								"update",
+								"96136375"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inactive",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3800/products/inactive",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3800",
+							"path": [
+								"products",
+								"inactive"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Orders",
 			"item": [
 				{
@@ -244,7 +346,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Felipe Soares\",\r\n    \"email\": \"felipe.soares@investment.com\",\r\n    \"password\": \"123456\",\r\n    \"cpf\": \"98765432100\",\r\n    \"birthday\": \"1993-06-16T15:30:00\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Felipe Nunes\",\r\n    \"email\": \"felipe.nunes@investment.com\",\r\n    \"password\": \"123456\",\r\n    \"cpf\": \"98765432100\",\r\n    \"birthday\": \"1993-06-16T15:30:00\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -299,137 +401,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3800/users/update",
+							"raw": "http://localhost:3800/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3800",
 							"path": [
-								"users",
-								"update"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Inactive",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3800/users/inactive",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3800",
-							"path": [
-								"users",
-								"inactive"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Products",
-			"item": [
-				{
-					"name": "Create",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Product6\",\r\n    \"value\": 30.25\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3800/products",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3800",
-							"path": [
-								"products"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Read",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3800/products",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3800",
-							"path": [
-								"products"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"value\": 37.29\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:3800/products/update/96136375",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3800",
-							"path": [
-								"products",
-								"update",
-								"96136375"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Inactive",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3800/products/inactive",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3800",
-							"path": [
-								"products",
-								"inactive"
+								"users"
 							]
 						}
 					},
@@ -471,7 +450,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQyNjAzMzE4LCJpYXQiOjE2NzA5NzEyODEsImV4cCI6MTY3MDk3MTg4MX0.GZ8PPOUhbpgi6_iHMmB7WpUo4wTHoRBA9LiH0-jhedw",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQyNjAzMzE4LCJpYXQiOjE2NzA5NzI2MTAsImV4cCI6MTY3MDk3MzIxMH0.lOufNghWeDv7PgY_GIVrl0lHcIxHqPyOE5i0IxS9a4U",
 				"type": "string"
 			}
 		]

@@ -19,8 +19,10 @@ export default async (req: Request, res: Response, next: NextFunction): Promise<
             && new Date(birthday)
         )) throw new Error("Birthday is not in the Date format");
 
-        if (cpf && typeof cpf !== "string" || cpf && cpf.length !== 11)
-            throw new Error("CPF must to be a string with 11 characters");
+        if (cpf && cpf && typeof cpf !== "string" 
+            || cpf && cpf.length !== 11
+            || cpf && !/^\d+$/.test(cpf)
+            ) throw new Error("CPF must to be a string with 11 characters and have only numbers");
 
         const emailRegex = /\S+@\S+\.\S+/;
 

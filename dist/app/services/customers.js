@@ -6,10 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const repositories_1 = require("../repositories");
 const generateId_1 = __importDefault(require("../helpers/generateId"));
 const logger_1 = __importDefault(require("../../utils/logger"));
-const { createCustomer: create, findCustomers: findAll, findCustomer: findOne, updateCustomer: update, activeInactiveCustomer: activeInactive } = repositories_1.CustomersRepository;
+const verifyEmailExists_1 = __importDefault(require("../helpers/verifyEmailExists"));
+const { createCustomer: create, findCustomers: findAll, findCustomer: findOne, updateCustomer: update, activeInactiveCustomer: activeInactive, findByEmail: findEmail } = repositories_1.CustomersRepository;
 const createCustomer = async (customer, userId) => {
     try {
         const customerId = (0, generateId_1.default)();
+        if (await (0, verifyEmailExists_1.default)(customer.email))
+            throw new Error("E-mail already registered");
         const newCustomer = await create({
             _id: customerId,
             name: customer.name,
@@ -65,10 +68,21 @@ const activeInactiveCustomer = async (customerId, userId) => {
         return error.message;
     }
 };
+const findByEmail = async (email) => {
+    try {
+        const user = await findEmail(email);
+        return user;
+    }
+    catch (error) {
+        logger_1.default.error(error);
+        return error.message;
+    }
+};
 exports.default = {
     createCustomer,
     findCustomers,
     findCustomer,
     updateCustomer,
-    activeInactiveCustomer
+    activeInactiveCustomer,
+    findByEmail
 };

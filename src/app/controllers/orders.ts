@@ -16,19 +16,17 @@ const {
 const create = async (req: Request, res: Response): Promise<void> => {
     try {
         const { productQuantity }: OrdersParams = req.body;
-        const { customerid, productid } = req.headers;
         const userId: number = req.userId;
-
-        const customerId: number = parseInt(customerid.toString());
-        const productId: number = parseInt(productid.toString());
-
-        const product: ProductsResponse = await productsServices.findProduct(productId, userId);
-
-        if(!product) throw new Error("Product not found");
+        const customerId: number = req.customerId;
+        const productId: number = req.productId;
 
         const customer: CustomersResponse = await customersServices.findCustomer(customerId, userId);
 
         if(!customer) throw new Error("Customer not found");
+
+        const product: ProductsResponse = await productsServices.findProduct(productId, userId);
+
+        if(!product) throw new Error("Product not found");
 
         const response: OrdersResponse = await createOrder(productQuantity, userId, customerId, product);
 
