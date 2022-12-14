@@ -1,5 +1,7 @@
 # Investment Orders
 
+>I apologize for not delivering Swagger and Unit Tests, it was in my plans, but I couldn't do it in time, due to other activities in the same period.
+
 In this application, you will be able to create your user, save your customers, products and the transactions made for each of your products for each registered customer.
 
 As I couldn't do the documentation in time with Swagger, as I would have liked, I saved the Postman collection used to test this project in the **docs** folder.
