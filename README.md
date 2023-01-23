@@ -1,12 +1,10 @@
 # Investment Orders
 
->I apologize for not delivering Swagger and Unit Tests, it was in my plans, but I couldn't do it in time, due to other activities in the same period.
-
 In this application, you will be able to create your user, save your customers, products and the transactions made for each of your products for each registered customer.
 
 As I couldn't do the documentation in time with Swagger, as I would have liked, I saved the Postman collection used to test this project in the **docs** folder.
 
->Normally I create an .env.example or .env.sample file and leave the environment variables open for those who need to test locally, but to make life easier for those who are recruiting, I preferred to leave the environment variables already set.
+>Normally I create an .env.example or .env.sample file and leave the environment variables open for those who need to test locally, but to make life easier for those who are testing, I preferred to leave the environment variables already set.
 
 ## Preparing to run the application
 
